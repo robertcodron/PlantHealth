@@ -130,3 +130,10 @@ dmypy.json
 =======
 venv
 .idea
+
+# A enlever quand la doc sera plus sexy
+Doc
+####
+
+migrations
+*.db
