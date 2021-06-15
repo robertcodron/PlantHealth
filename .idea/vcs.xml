@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/micropython" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/micropython/lib/axtls" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/micropython/lib/berkeley-db-1.xx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vagrant/esp8266-micropython-vagrant" vcs="Git" />
   </component>
 </project>

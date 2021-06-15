@@ -136,6 +136,5 @@ Doc
 ####
 
 migrations
-micropython
-esp-open-sdk
+
 *.db
