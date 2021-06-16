@@ -138,3 +138,6 @@ Doc
 migrations
 .vagrant
 *.db
+vagrant/esp8266-micropython-vagrant/esp*
+vagrant/esp8266-micropython-vagrant/micropython*
+vagrant/esp8266-micropython-vagrant/xtensa*
