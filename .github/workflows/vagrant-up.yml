@@ -19,7 +19,7 @@ jobs:
 
     - name: Run vagrant up
       run: vagrant up
-      working-directory: ../../vagrant/esp8266-micropython-vagrant/
+      working-directory: /vagrant/esp8266-micropython-vagrant/
 
     - name: ssh into box after boot
       run: vagrant ssh -c "cd /vagrant/micropython/ports/esp8266 && make"
