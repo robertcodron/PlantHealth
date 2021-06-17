@@ -11,7 +11,7 @@ jobs:
     - name: Install package
       run: sudo apt update && sudo apt-get -y install virtualbox wget curl
     - name: Download & install vagrant
-      run: wget -O https://releases.hashicorp.com/vagrant/2.2.16/vagrant_2.2.16_x86_64.deb && apt -y install .vagrant*
+      run: wget https://releases.hashicorp.com/vagrant/2.2.16/vagrant_2.2.16_x86_64.deb && sudo dpkg -i vagrant_2.2.16_x86_64.deb
 
     - name: Cache Vagrant boxes
       uses: actions/cache@v2
