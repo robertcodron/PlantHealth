@@ -8,6 +8,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install package
+      run: sudo apt update && apt-get -y install virtualbox wget curl
+    - name: Download & install vagrant
+      run: wget -O https://releases.hashicorp.com/vagrant/2.2.16/vagrant_2.2.16_x86_64.deb && apt -y install .vagrant*
 
     - name: Cache Vagrant boxes
       uses: actions/cache@v2
