@@ -12,31 +12,14 @@
     <img class="mb-4" src="{{ url_for('static', filename='img/Emojione_1F331.svg') }}" alt="" width="200" height="300">
     </div>
     <div class="col-md-4 ms-sm-auto col-lg-5 px-md-2">
-        <h1>Humidity : 10 % </h1>
+        <h3>Humidity :  {{ posts['moisture_pourcent'] }} % </h3>
     </div>
-posts :
-    <!-- 'room_pourcent_humidity_air': 33.0,
-        'status_moisture': 0.0, 'topic': 'stats/'},
-        {'time': '2021-06-13T13:31:05.183513Z',
-        'UUID': 1458415.0,
-        'host': 'raspberrypi',
-        'moisture_pourcent': 54.0,
-        'room-temperature': 25.0,-->
-    {{ posts['moisture_pourcent'] }}
+    <div class="col-md-4 ms-sm-auto col-lg-5 px-md-2">
+        <h3>Room Temperature :  {{ posts['room_temperature'] }} °C </h3>
+    </div>
+    <div class="col-md-4 ms-sm-auto col-lg-5 px-md-2">
+        <h3>Air Humidity :  {{ posts['room_temperature'] }} % </h3>
+    </div>
+    {{ posts }}
 
-    {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['moisture_pourcent'] }}</h1>
-
-        </div>
-
-      </header>
-
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
 {% endblock %}

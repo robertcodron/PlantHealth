@@ -12,9 +12,9 @@ import json
 from flaskr.auth import login_required
 from flaskr.models import User
 from influxdb import InfluxDBClient
-client = InfluxDBClient(host='192.168.80.1', port=8086)
+from flaskr.config import Config
+client = InfluxDBClient(host=Config.INFLUXDB, port=Config.INFLUXDB_PORT)
 
-load_dotenv()
 
 bp = Blueprint('plant', __name__)
 from flaskr.database import db_session
@@ -35,9 +35,11 @@ def index():
         'room-temperature': 25.0
     """
 
-    res = client.query('SELECT time, room_pourcent_humidity_air, moisture_pourcent, room-temperature, UUID  FROM mqtt_consumer where time < now() + 1d limit 10')
+    res = client.query("SELECT mean(\"room_pourcent_humidity_air\") as room_pourcent_humidity_air, round(mean(\"moisture_pourcent\")) as moisture_pourcent, mean(\"room-temperature\") as room_temperature  FROM mqtt_consumer where (\"topic\" = 'stats/') AND time >= now() - 30m GROUP BY time(30m) fill(null)")
     #print(dir(res))
     to_posts = list(res.get_points())
+    #res_temp = client.query("SELECT mean(\"room-temperature\") FROM \"mqtt_consumer\" WHERE (\"topic\" = 'stats/') AND time >= now() - 30m GROUP BY time(30m) fill(null)")
+    #temp_post = list(res_temp.get_points())
     #print(to_posts)
     return render_template('plant/index.html', posts=to_posts[0])
 

@@ -11,7 +11,8 @@ class Config:
     #SECRET_KEY = 'this-really-needs-to-be-changed'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+    INFLUXDB = os.getenv("INFLUXDB")
+    INFLUXDB_PORT = os.getenv('INFLUXDB_PORT')
 
 class ProductionConfig(Config):
     pass
