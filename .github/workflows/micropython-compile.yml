@@ -16,7 +16,7 @@ jobs:
                                     autoconf automake libtool gcc g++ gperf \
                                     flex bison texinfo gawk ncurses-dev libexpat-dev \
                                     python sed libreadline-dev libffi-dev pkg-config \
-                                    help2man python-dev python-serial wget
+                                    help2man python3-dev python3-serial wget
     - name: Get esp open sdk
       working-directory: ~
       run: |
