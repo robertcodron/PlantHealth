@@ -1,0 +1,53 @@
+name: compile-module
+
+on: [push]
+
+jobs:
+  install-packages:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9.5'
+    - name : Install compile package
+      run: |
+        sudo apt-get install -y build-essential git make unrar-free unzip \
+                                    autoconf automake libtool gcc g++ gperf \
+                                    flex bison texinfo gawk ncurses-dev libexpat-dev \
+                                    sed libreadline-dev libffi-dev pkg-config \
+                                    help2man python3-dev python3-serial wget libtool-bin
+    - name: Install Espressif
+      working-directory: ~
+      run: |
+        wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz 2> /dev/null
+        tar xvfz xtensa-esp32-elf-linux64-1.22.0-61-gab8375a-5.2.0.tar.gz
+        echo "PATH=/vagrant/xtensa-esp32-elf/bin:\$PATH" >> ~/.profile
+        echo "Installing esp-open-sdk, Espressif ESP-IDF, and micropython source..."
+
+    - name: Get esp open sdk
+      working-directory: ~
+      run: |
+        unset LD_LIBRARY_PATH
+        git clone --recursive https://github.com/robertcodron/esp-open-sdk.git
+        cd esp-open-sdk
+        make STANDALONE=y PYTHON=python3 1>/dev/null
+        echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
+        source ~/.profile
+
+    - name: Install espressif
+      working-directory: ~
+      run: |
+        git clone --recursive https://github.com/espressif/esp-idf.git
+        cd esp-idf
+        make all 1>/dev/null
+
+    - name: Install micropython
+      working-directory: ~
+      run: |
+        git clone --recursive https://github.com/micropython/micropython.git
+        cd micropython
+        git submodule update --init
+        make -C mpy-cross 2>/dev/null
+        make -C /ports/esp8266 2>/dev/null
+        echo "Finished provisioning, now run 'vagrant ssh' to enter the virtual machine."
