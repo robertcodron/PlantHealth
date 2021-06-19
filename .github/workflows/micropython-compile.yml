@@ -31,7 +31,7 @@ jobs:
         unset LD_LIBRARY_PATH
         git clone --recursive https://github.com/robertcodron/esp-open-sdk.git
         cd esp-open-sdk
-        make STANDALONE=y
+        make STANDALONE=y 2>/dev/null
         echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
         source ~/.profile
 
@@ -40,7 +40,7 @@ jobs:
       run: |
         git clone --recursive https://github.com/espressif/esp-idf.git
         cd esp-idf
-        make all
+        make all 2>/dev/null
 
     - name: Install micropython
       working-directory: ~
@@ -48,6 +48,6 @@ jobs:
         git clone --recursive https://github.com/micropython/micropython.git
         cd micropython
         git submodule update --init
-        make -C mpy-cross
-        make -C /ports/esp8266
+        make -C mpy-cross 2>/dev/null
+        make -C /ports/esp8266 2>/dev/null
         echo "Finished provisioning, now run 'vagrant ssh' to enter the virtual machine."
