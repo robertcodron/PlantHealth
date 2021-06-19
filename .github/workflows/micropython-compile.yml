@@ -28,6 +28,7 @@ jobs:
     - name: Get esp open sdk
       working-directory: ~
       run: |
+        unset LD_LIBRARY_PATH
         git clone --recursive https://github.com/robertcodron/esp-open-sdk.git
         cd esp-open-sdk
         make STANDALONE=y
