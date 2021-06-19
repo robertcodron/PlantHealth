@@ -31,7 +31,7 @@ jobs:
         unset LD_LIBRARY_PATH
         git clone --recursive https://github.com/robertcodron/esp-open-sdk.git
         cd esp-open-sdk
-        make STANDALONE=y 2>/dev/null
+        make STANDALONE=y 1>/dev/null
         echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
         source ~/.profile
 
@@ -40,7 +40,7 @@ jobs:
       run: |
         git clone --recursive https://github.com/espressif/esp-idf.git
         cd esp-idf
-        make all 2>/dev/null
+        make all 1>/dev/null
 
     - name: Install micropython
       working-directory: ~
